@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour ma maman ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fff0f3, #fce4ec, #f8e8e8);
+    font-family: 'Georgia', serif;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    padding: 25px;
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    color: #a64d65;
+    font-size: 27px;
+    margin-bottom: 35px;
+}
+
+/* Coeur animé */
+.heart {
+    font-size: 110px;
+    cursor: pointer;
+    display: inline-block;
+    animation: beat 1s infinite;
+    filter: drop-shadow(0 8px 12px #e88a9e);
+    transition: transform 0.3s;
+}
+
+.heart:hover {
+    transform: scale(1.15);
+}
+
+@keyframes beat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.15); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.2); }
+}
+
+.instruction {
+    color: #a65c70;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+/* Cadre du message */
+.message-box {
+    display: none;
+    background: rgba(255,255,255,0.85);
+    padding: 35px 25px;
+    border: 2px solid #e9a1b2;
+    border-radius: 25px;
+    box-shadow: 0 10px 35px rgba(190, 90, 120, 0.2);
+    animation: appear 1s ease forwards;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(35px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.message-box h2 {
+    color: #c0395b;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.message {
+    color: #754452;
+    font-size: 23px;
+    line-height: 1.7;
+}
+
+.signature {
+    color: #c0395b;
+    font-size: 21px;
+    font-style: italic;
+    margin-top: 25px;
+}
+
+.decorations {
+    font-size: 35px;
+    margin: 15px 0;
+}
+
+/* Ballons flottants */
+.balloon {
+    position: fixed;
+    bottom: -100px;
+    font-size: 45px;
+    animation: floatUp 6s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 1; }
+    100% {
+        transform: translateY(-120vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+@media(max-width: 480px) {
+    h1 { font-size: 23px; }
+    .heart { font-size: 95px; }
+    .message-box h2 { font-size: 25px; }
+    .message { font-size: 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 id="title">Une petite surprise pour toi, maman... 💕</h1>
+
+    <div class="heart" id="heart" onclick="showMessage()">
+        ❤️
+    </div>
+
+    <p class="instruction" id="instruction">
+        Clique sur le cœur ❤️
+    </p>
+
+    <div class="message-box" id="messageBox">
+
+        <div class="decorations">
+            🎈 🌸 💖 🌷 🎈
+        </div>
+
+        <h2>À ma merveilleuse maman ❤️</h2>
+
+        <p class="message">
+            Je t'aime maman ! ❤️🥰
+            <br>
+            Tu es la meilleure au monde ! 🌍💐
+            <br>
+            Merci pour ton amour, ta tendresse
+            et tout ce que tu fais.
+            <br>
+            Tu es un cadeau précieux dans ma vie. 💝
+        </p>
+
+        <div class="decorations">
+            💕 🌹 🎀 💗 🌹 💕
+        </div>
+
+        <p class="signature">
+            Ta fille Fortuné ❤️
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+function showMessage() {
+
+    document.getElementById("heart").style.display = "none";
+    document.getElementById("instruction").style.display = "none";
+    document.getElementById("title").style.display = "none";
+
+    document.getElementById("messageBox").style.display = "block";
+
+    // Lancer les ballons
+    const emojis = ["🎈", "❤️", "💗", "🌸", "💕", "💖"];
+
+    for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+            const balloon = document.createElement("div");
+            balloon.className = "balloon";
+            balloon.innerHTML =
+                emojis[Math.floor(Math.random() * emojis.length)];
+
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.animationDuration =
+                (4 + Math.random() * 4) + "s";
+
+            document.body.appendChild(balloon);
+
+            setTimeout(() => balloon.remove(), 8000);
+        }, i * 180);
+    }
+}
+</script>
+
+</body>
+</html>
