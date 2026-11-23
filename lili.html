@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pour ma maman ❤️</title>
 
 <style>
@@ -19,8 +20,8 @@ body {
     justify-content: center;
     align-items: center;
     background: linear-gradient(135deg, #fff0f3, #fce4ec, #f8e8e8);
-    font-family: 'Georgia', serif;
-    overflow: hidden;
+    font-family: Georgia, serif;
+    overflow-x: hidden;
     text-align: center;
 }
 
@@ -36,7 +37,7 @@ h1 {
     margin-bottom: 35px;
 }
 
-/* Coeur animé */
+/* Cœur animé */
 .heart {
     font-size: 110px;
     cursor: pointer;
@@ -66,7 +67,7 @@ h1 {
 /* Cadre du message */
 .message-box {
     display: none;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.9);
     padding: 35px 25px;
     border: 2px solid #e9a1b2;
     border-radius: 25px;
@@ -109,6 +110,26 @@ h1 {
     margin: 15px 0;
 }
 
+/* Bouton Replay */
+.replay-btn {
+    margin-top: 25px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #d94f70;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    transition: 0.3s;
+    box-shadow: 0 5px 12px rgba(190, 70, 100, 0.2);
+}
+
+.replay-btn:hover {
+    background: #b92f55;
+    transform: scale(1.08);
+}
+
 /* Ballons flottants */
 .balloon {
     position: fixed;
@@ -116,6 +137,7 @@ h1 {
     font-size: 45px;
     animation: floatUp 6s linear forwards;
     pointer-events: none;
+    z-index: 10;
 }
 
 @keyframes floatUp {
@@ -123,18 +145,22 @@ h1 {
         transform: translateY(0) rotate(0deg);
         opacity: 0;
     }
-    15% { opacity: 1; }
+    15% {
+        opacity: 1;
+    }
     100% {
         transform: translateY(-120vh) rotate(25deg);
         opacity: 0;
     }
 }
 
+/* Adaptation téléphone */
 @media(max-width: 480px) {
     h1 { font-size: 23px; }
     .heart { font-size: 95px; }
     .message-box h2 { font-size: 25px; }
     .message { font-size: 20px; }
+    .signature { font-size: 19px; }
 }
 </style>
 </head>
@@ -143,8 +169,11 @@ h1 {
 
 <div class="container">
 
-    <h1 id="title">Une petite surprise pour toi, maman... 💕</h1>
+    <h1 id="title">
+        Une petite surprise pour toi, maman... 💕
+    </h1>
 
+    <!-- Cœur cliquable -->
     <div class="heart" id="heart" onclick="showMessage()">
         ❤️
     </div>
@@ -153,6 +182,7 @@ h1 {
         Clique sur le cœur ❤️
     </p>
 
+    <!-- Message caché au départ -->
     <div class="message-box" id="messageBox">
 
         <div class="decorations">
@@ -180,11 +210,18 @@ h1 {
             Ta fille Fortuné ❤️
         </p>
 
+        <!-- Bouton Replay -->
+        <button class="replay-btn" onclick="replay()">
+            💖 Rejouer la surprise
+        </button>
+
     </div>
 
 </div>
 
 <script>
+
+// Fonction pour afficher le message
 function showMessage() {
 
     document.getElementById("heart").style.display = "none";
@@ -193,26 +230,53 @@ function showMessage() {
 
     document.getElementById("messageBox").style.display = "block";
 
-    // Lancer les ballons
-    const emojis = ["🎈", "❤️", "💗", "🌸", "💕", "💖"];
+    // Animation des ballons et des cœurs
+    const emojis = ["🎈", "❤️", "💗", "🌸", "💕", "💖", "🌹"];
 
     for (let i = 0; i < 25; i++) {
+
         setTimeout(() => {
+
             const balloon = document.createElement("div");
+
             balloon.className = "balloon";
+
             balloon.innerHTML =
                 emojis[Math.floor(Math.random() * emojis.length)];
 
             balloon.style.left = Math.random() * 100 + "vw";
+
             balloon.style.animationDuration =
                 (4 + Math.random() * 4) + "s";
 
             document.body.appendChild(balloon);
 
             setTimeout(() => balloon.remove(), 8000);
+
         }, i * 180);
     }
 }
+
+// Fonction pour rejouer la surprise
+function replay() {
+
+    // Cacher le message
+    document.getElementById("messageBox").style.display = "none";
+
+    // Réafficher le cœur
+    document.getElementById("heart").style.display = "inline-block";
+
+    // Réafficher le texte d'accueil
+    document.getElementById("instruction").style.display = "block";
+    document.getElementById("title").style.display = "block";
+
+    // Supprimer tous les ballons encore présents
+    document.querySelectorAll(".balloon").forEach(balloon => {
+        balloon.remove();
+    });
+
+}
+
 </script>
 
 </body>
