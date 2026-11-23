@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nounours rose 🧸</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    overflow:hidden;font-family:'Fredoka',system-ui,sans-serif;
+    background:linear-gradient(#8fd3ff,#d8f1ff 70%);
+    display:flex;align-items:flex-end;justify-content:center;position:relative;
+  }
+
+  /* DÉCOR DESSIN ANIMÉ */
+  .decor{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+  .nuage{animation:derive linear infinite}
+  .nuage.a{animation-duration:60s}
+  .nuage.b{animation-duration:85s;animation-delay:-30s}
+  @keyframes derive{from{transform:translateX(-300px)}to{transform:translateX(1500px)}}
+  .soleil{transform-origin:1180px 110px;animation:tourne 30s linear infinite}
+  @keyframes tourne{to{transform:rotate(360deg)}}
+
+  /* SCÈNE */
+  .scene{position:relative;z-index:2;width:min(92vw,460px);margin-bottom:6vh;text-align:center}
+  .titre{
+    font-weight:600;font-size:1.35rem;color:#fff;margin-bottom:6px;
+    -webkit-text-stroke:6px #c2457f;paint-order:stroke fill;
+    letter-spacing:1px;
+  }
+  svg.nounours{width:100%;height:auto;display:block;overflow:visible}
+  .stroke{stroke:#8a2c5b;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+
+  /* Ventre cliquable */
+  #ventre{cursor:pointer}
+  #ventre:focus-visible{outline:none}
+  #ventre:focus-visible .ventre-forme{stroke:#fff;stroke-width:7}
+  #ventre:hover .ventre-forme{fill:#ffe3ee}
+
+  /* ÉTAT ENDORMI */
+  .yeux-ouverts,.bouche-contente,.bulle,.joues-vives{opacity:0}
+  .yeux-fermes,.bouche-dort{opacity:1}
+  .corps{transform-origin:200px 380px;animation:respire 3.2s ease-in-out infinite}
+  @keyframes respire{0%,100%{transform:scale(1,1)}50%{transform:scale(1.025,1.04)}}
+  .zzz text{font-weight:600;fill:#fff;stroke:#5a7fc8;stroke-width:6;paint-order:stroke;opacity:0;animation:zzz 3s ease-in infinite}
+  .zzz text:nth-child(2){animation-delay:1s}
+  .zzz text:nth-child(3){animation-delay:2s}
+  @keyframes zzz{0%{opacity:0;transform:translate(0,0) scale(.6)}20%{opacity:1}100%{opacity:0;transform:translate(35px,-70px) scale(1.2)}}
+  .bras-g,.bras-d{transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+  .bras-g{transform-origin:105px 300px}
+  .bras-d{transform-origin:295px 300px}
+  .bulle{transition:opacity .4s .3s}
+
+  /* ÉTAT RÉVEILLÉ */
+  .eveille .yeux-fermes,.eveille .bouche-dort,.eveille .zzz{opacity:0}
+  .eveille .yeux-ouverts,.eveille .bouche-contente,.eveille .bulle,.eveille .joues-vives{opacity:1}
+  .eveille .corps{animation:saute .7s ease-out 1, respire 3.2s ease-in-out .7s infinite}
+  @keyframes saute{0%{transform:translateY(0)}35%{transform:translateY(-34px) scale(1.02,1.05)}70%{transform:translateY(0) scale(1.05,.95)}100%{transform:none}}
+  .eveille .bras-g{transform:rotate(38deg);animation:salue-g .8s ease-in-out .5s infinite alternate}
+  .eveille .bras-d{transform:rotate(-38deg);animation:salue-d .8s ease-in-out .5s infinite alternate}
+  @keyframes salue-g{from{transform:rotate(30deg)}to{transform:rotate(52deg)}}
+  @keyframes salue-d{from{transform:rotate(-30deg)}to{transform:rotate(-52deg)}}
+  .pupille{animation:regarde 3s ease-in-out infinite}
+  @keyframes regarde{0%,100%{transform:translateX(0)}30%{transform:translateX(3px)}70%{transform:translateX(-3px)}}
+
+  .indice{
+    margin-top:10px;display:inline-block;background:#fff;color:#a23468;font-weight:600;
+    padding:8px 18px;border-radius:30px;border:4px solid #8a2c5b;font-size:1.05rem;
+    box-shadow:0 5px 0 #8a2c5b;transition:transform .3s;
+  }
+  .indice.fort{animation:pulse 1.6s ease-in-out infinite}
+  @keyframes pulse{50%{transform:scale(1.06)}}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- Fond cartoon -->
+<svg class="decor" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <defs><linearGradient id="ciel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7cc8ff"/><stop offset="1" stop-color="#e6f7ff"/></linearGradient></defs>
+  <rect width="1440" height="800" fill="url(#ciel)"/>
+  <g class="soleil">
+    <g stroke="#ffc93c" stroke-width="10" stroke-linecap="round">
+      <path d="M1180 30v-30M1180 190v30M1100 110h-30M1260 110h30M1124 54l-21-21M1236 166l21 21M1236 54l21-21M1124 166l-21 21"/>
+    </g>
+  </g>
+  <circle cx="1180" cy="110" r="58" fill="#ffe066" stroke="#e8a317" stroke-width="6"/>
+  <g class="nuage a" fill="#fff" stroke="#9cc4e8" stroke-width="5">
+    <path d="M120 170a40 40 0 0 1 70-22a50 50 0 0 1 92 14a34 34 0 0 1-8 66H140a38 38 0 0 1-20-58z"/>
+  </g>
+  <g class="nuage b" fill="#fff" stroke="#9cc4e8" stroke-width="5">
+    <path d="M300 280a30 30 0 0 1 52-16a40 40 0 0 1 72 10a28 28 0 0 1-4 54H322a30 30 0 0 1-22-48z"/>
+  </g>
+  <!-- collines -->
+  <path d="M0 560Q250 440 520 540T1050 520T1440 540V800H0z" fill="#a8e6a1" stroke="#4e9a52" stroke-width="6"/>
+  <path d="M0 650Q300 560 640 640T1440 620V800H0z" fill="#7fd68a" stroke="#3f8a48" stroke-width="6"/>
+  <!-- fleurs -->
+  <g stroke="#3f8a48" stroke-width="4" stroke-linecap="round">
+    <path d="M160 700v-36M330 730v-30M1010 710v-34M1250 740v-32M1370 690v-30"/>
+  </g>
+  <g stroke="#8a2c5b" stroke-width="3">
+    <circle cx="160" cy="656" r="13" fill="#ff9ec4"/><circle cx="330" cy="694" r="12" fill="#fff3a0"/>
+    <circle cx="1010" cy="668" r="13" fill="#ffb3d1"/><circle cx="1250" cy="700" r="12" fill="#ffd27f"/>
+    <circle cx="1370" cy="652" r="13" fill="#ff9ec4"/>
+  </g>
+  <g fill="#ffe066"><circle cx="160" cy="656" r="4"/><circle cx="330" cy="694" r="4"/><circle cx="1010" cy="668" r="4"/><circle cx="1250" cy="700" r="4"/><circle cx="1370" cy="652" r="4"/></g>
+</svg>
+
+<main class="scene" id="scene">
+  <p class="titre" id="titre">Chut… il dort 🤫</p>
+
+  <svg class="nounours" viewBox="0 0 400 470" role="img" aria-label="Un nounours rose">
+    <!-- ombre -->
+    <ellipse cx="200" cy="452" rx="130" ry="14" fill="rgba(60,100,60,.25)"/>
+
+    <g class="corps">
+      <!-- jambes -->
+      <ellipse class="stroke" cx="130" cy="420" rx="52" ry="36" fill="#f48fb1"/>
+      <ellipse class="stroke" cx="270" cy="420" rx="52" ry="36" fill="#f48fb1"/>
+      <ellipse cx="130" cy="426" rx="26" ry="18" fill="#ffd3e4" stroke="#8a2c5b" stroke-width="4"/>
+      <ellipse cx="270" cy="426" rx="26" ry="18" fill="#ffd3e4" stroke="#8a2c5b" stroke-width="4"/>
+
+      <!-- bras -->
+      <g class="bras-g"><ellipse class="stroke" cx="88" cy="320" rx="30" ry="56" fill="#f48fb1" transform="rotate(18 88 320)"/></g>
+      <g class="bras-d"><ellipse class="stroke" cx="312" cy="320" rx="30" ry="56" fill="#f48fb1" transform="rotate(-18 312 320)"/></g>
+
+      <!-- corps -->
+      <ellipse class="stroke" cx="200" cy="335" rx="100" ry="105" fill="#f9a8c9"/>
+
+      <!-- ventre cliquable -->
+      <g id="ventre" tabindex="0" role="button" aria-label="Toucher le ventre du nounours">
+        <ellipse class="ventre-forme" cx="200" cy="355" rx="64" ry="68" fill="#ffd3e4" stroke="#8a2c5b" stroke-width="4"/>
+        <path d="M185 340q15 10 30 0" fill="none" stroke="#e58aae" stroke-width="4" stroke-linecap="round"/>
+      </g>
+
+      <!-- oreilles -->
+      <circle class="stroke" cx="108" cy="100" r="42" fill="#f48fb1"/>
+      <circle cx="108" cy="102" r="22" fill="#ffd3e4"/>
+      <circle class="stroke" cx="292" cy="100" r="42" fill="#f48fb1"/>
+      <circle cx="292" cy="102" r="22" fill="#ffd3e4"/>
+
+      <!-- tête -->
+      <ellipse class="stroke" cx="200" cy="165" rx="108" ry="95" fill="#f9a8c9"/>
+
+      <!-- joues -->
+      <ellipse cx="124" cy="190" rx="20" ry="13" fill="#ff7fae" opacity=".55"/>
+      <ellipse cx="276" cy="190" rx="20" ry="13" fill="#ff7fae" opacity=".55"/>
+      <g class="joues-vives"><ellipse cx="124" cy="190" rx="20" ry="13" fill="#ff5c98" opacity=".5"/><ellipse cx="276" cy="190" rx="20" ry="13" fill="#ff5c98" opacity=".5"/></g>
+
+      <!-- museau -->
+      <ellipse cx="200" cy="198" rx="42" ry="32" fill="#ffd3e4" stroke="#8a2c5b" stroke-width="4"/>
+      <ellipse cx="200" cy="184" rx="15" ry="11" fill="#8a2c5b"/>
+      <ellipse cx="195" cy="180" rx="4" ry="2.5" fill="#fff" opacity=".7"/>
+
+      <!-- yeux fermés (dort) -->
+      <g class="yeux-fermes" fill="none" stroke="#5a1f40" stroke-width="5" stroke-linecap="round">
+        <path d="M130 152q20 18 40 0"/><path d="M230 152q20 18 40 0"/>
+      </g>
+      <!-- yeux ouverts -->
+      <g class="yeux-ouverts">
+        <ellipse cx="150" cy="150" rx="19" ry="23" fill="#fff" stroke="#5a1f40" stroke-width="4"/>
+        <ellipse cx="250" cy="150" rx="19" ry="23" fill="#fff" stroke="#5a1f40" stroke-width="4"/>
+        <g class="pupille"><circle cx="152" cy="153" r="11" fill="#3a1228"/><circle cx="252" cy="153" r="11" fill="#3a1228"/>
+        <circle cx="156" cy="148" r="4" fill="#fff"/><circle cx="256" cy="148" r="4" fill="#fff"/></g>
+      </g>
+
+      <!-- bouches -->
+      <path class="bouche-dort" d="M188 208q12 8 24 0" fill="none" stroke="#5a1f40" stroke-width="4" stroke-linecap="round"/>
+      <g class="bouche-contente">
+        <path d="M178 206q22 30 44 0z" fill="#b3123f" stroke="#5a1f40" stroke-width="4" stroke-linejoin="round"/>
+        <path d="M190 220q10 8 20 0" fill="#ff8fb1"/>
+      </g>
+    </g>
+
+    <!-- Zzz -->
+    <g class="zzz" font-size="38"><text x="290" y="70">Z</text><text x="310" y="50" font-size="30">z</text><text x="325" y="32" font-size="24">z</text></g>
+
+    <!-- bulle -->
+    <g class="bulle">
+      <path d="M255 20h120a16 16 0 0 1 16 16v34a16 16 0 0 1-16 16h-75l-22 22 4-22h-27a16 16 0 0 1-16-16V36a16 16 0 0 1 16-16z" fill="#fff" stroke="#8a2c5b" stroke-width="4" stroke-linejoin="round" transform="translate(-45 -22) scale(1)"/>
+      <text x="205" y="70" font-size="26" font-weight="600" fill="#a23468" font-family="Fredoka,sans-serif">Coucou ! 🌞</text>
+    </g>
+  </svg>
+
+  <span class="indice fort" id="indice">👆 Touche son ventre</span>
+</main>
+
+<script>
+  const scene  = document.getElementById('scene');
+  const ventre = document.getElementById('ventre');
+  const titre  = document.getElementById('titre');
+  const indice = document.getElementById('indice');
+  let reveille = false;
+
+  function basculer(){
+    reveille = !reveille;
+    scene.classList.toggle('eveille', reveille);
+    titre.textContent = reveille ? 'Bonjour, le voilà réveillé ! 🎉' : 'Chut… il dort 🤫';
+    indice.textContent = reveille ? '🌙 Touche encore pour l’endormir' : '👆 Touche son ventre';
+    indice.classList.toggle('fort', !reveille);
+  }
+  ventre.addEventListener('click', basculer);
+  ventre.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); basculer(); }
+  });
+</script>
+</body>
+</html>
